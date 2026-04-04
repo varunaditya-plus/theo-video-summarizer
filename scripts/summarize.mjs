@@ -86,6 +86,8 @@ async function summarizeAndWrite(c, list) {
   const key = process.env.OPENROUTER_KEY;
   if (!key) throw new Error("OPENROUTER_KEY is not set");
 
+  console.error(`${c.id}: ${transcript.length} chars transcript -> OpenRouter`);
+
   const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
@@ -98,15 +100,11 @@ async function summarizeAndWrite(c, list) {
     }),
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data?.error?.message || `OpenRouter ${r.status}`);
+  if (!res.ok) throw new Error(data?.error?.message || `OpenRouter ${res.status}`);
   const summary = data?.choices?.[0]?.message?.content?.trim();
   if (!summary) throw new Error("No summary in response");
 
-  write(join(videosDir, `${c.id}.json`), {
-    videoId: c.id,
-    summary,
-    generatedAt: new Date().toISOString(),
-  });
+  writeFileSync(join(videosDir, `${c.id}.md`), summary + "\n", "utf8");
 
   const row = {
     id: c.id,
@@ -128,21 +126,25 @@ async function run() {
   const feedAll = process.argv.includes("--feed-all");
   const forceFeed = process.argv.includes("--force");
 
+  console.error("fetching rss");
   const r = await fetch(feed);
   if (!r.ok) throw new Error(`RSS ${r.status}`);
   const entries = entriesFromXml(await r.text());
+  console.error(`feed parsed: ${entries.length} video(s)`);
 
   if (feedAll) {
     let done = 0;
     let skipped = 0;
     let failed = 0;
-    for (const c of entries) {
-      const out = join(videosDir, `${c.id}.json`);
+    for (let i = 0; i < entries.length; i++) {
+      const c = entries[i];
+      const out = join(videosDir, `${c.id}.md`);
       if (existsSync(out) && !forceFeed) {
         skipped++;
-        console.log("skip", c.id);
+        console.error(`[${i + 1}/${entries.length}] skip (already have ${c.id})`);
         continue;
       }
+      console.error(`[${i + 1}/${entries.length}] summarizing ${c.id}…`);
       try {
         await summarizeAndWrite(c, read(videosJson, []));
         done++;
