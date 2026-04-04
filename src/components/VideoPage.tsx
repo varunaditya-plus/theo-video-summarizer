@@ -32,7 +32,7 @@ export function VideoPage() {
       .finally(() => setDetailLoading(false))
   }, [videoId])
 
-  const selectedTitle = videos.find((x) => x.id === videoId)?.title ?? ''
+  const selected = videos.find((x) => x.id === videoId)
 
   return (
     <div className="text-neutral-100">
@@ -44,7 +44,8 @@ export function VideoPage() {
       <SummaryPage
         loading={detailLoading}
         loadError={Boolean(detail && typeof detail === 'object' && 'error' in detail)}
-        videoTitle={selectedTitle}
+        videoTitle={selected?.title ?? ''}
+        videoDescription={selected?.description ?? ''}
         summaryMarkdown={typeof detail === 'string' ? detail : null}
       />
     </div>

@@ -1,12 +1,11 @@
-import { createRouter } from '@tanstack/react-router'
+import { createRouter, Navigate } from '@tanstack/react-router'
 import { routeTree } from './routeTree'
-import { NotFoundPage } from './components/NotFoundPage'
 import { getRouterBasepath } from './lib/paths'
 
 export const router = createRouter({
   routeTree,
   basepath: getRouterBasepath(),
-  defaultNotFoundComponent: NotFoundPage,
+  defaultNotFoundComponent: () => <Navigate to="/" replace />,
 })
 
 declare module '@tanstack/react-router' {

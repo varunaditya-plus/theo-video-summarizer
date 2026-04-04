@@ -36,7 +36,7 @@ export function HomePage() {
       <header className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Theo video summaries</h1>
         <p className="mt-1 text-neutral-400">
-          A better way to watch Theo's videos (with sponsors because making a video about this isn't free)
+          A better way to know what's going on in tech. This site summarizes a bunch of Theo's videos (with sponsors because making a video about this doesn't pay the bills) so you know what's going on quickly. <b>The content on this site is produced by AI</b>. Also, this site is open source at <a href="https://github.com/varunaditya-plus/theo-summarizer" className="text-neutral-300 hover:text-white underline">github.com/varunaditya-plus/theo-summarizer</a>.
         </p>
       </header>
 
@@ -46,7 +46,7 @@ export function HomePage() {
         <ul className="m-0 grid list-none grid-cols-2 gap-4 p-0 sm:grid-cols-3 md:grid-cols-4">
           {videos.map((v) => (
             <li key={v.id}>
-              <Link to="/$videoId" params={{ videoId: v.id }} className="flex w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900 text-left transition hover:border-blue-400">
+              <Link to="/$videoId" params={{ videoId: v.id }} className="flex w-full cursor-pointer flex-col overflow-hidden border border-neutral-800 bg-neutral-900 text-left transition hover:border-neutral-700">
                 <img className="aspect-video w-full bg-neutral-900 object-cover" src={v.thumbnailUrl || `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`} loading="lazy" decoding="async" />
                 <span className="p-2.5 text-xs font-semibold leading-snug">{v.title}</span>
               </Link>
