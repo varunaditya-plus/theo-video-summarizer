@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "id": "08NqrRQArNw",
+    "title": "I’m serious.",
+    "description": "I love open source, but that never stopped me from using a ton of closed source stuff. That's starting to change...\n\nThank you WorkOS for sponsoring! Check them out at: https://soydev.link/workos\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i1.ytimg.com/vi/08NqrRQArNw/hqdefault.jpg",
+    "publishedAt": "2026-04-04T11:01:42+00:00"
+  },
+  {
+    "id": "j_kJNYLI6Tw",
+    "title": "We need to talk about the Claude Code rate limits",
+    "description": "Anthropic just made the limits on the Claude Max/Pro plans a lot worse...\n\nThank you Depot for sponsoring! Check them out at: https://soydev.link/depot\n\nSOURCES\nhttps://x.com/trq212/status/2032916661452595648\nhttps://x.com/trq212/status/2037254607001559305\nhttps://x.com/Pranit/status/2037353721047491047\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i3.ytimg.com/vi/j_kJNYLI6Tw/hqdefault.jpg",
+    "publishedAt": "2026-04-03T08:56:24+00:00"
+  },
+  {
+    "id": "icu0GZcSb58",
+    "title": "I got DMCA'd by Anthropic (not a joke)",
+    "description": "Well, the Claude Code drama continues. I got DMCA'd by Anthropic. There's a twist though. Enjoy this ride with me.\n\nThank you Clerk for sponsoring! Check them out at: https://soydev.link/clerk\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i2.ytimg.com/vi/icu0GZcSb58/hqdefault.jpg",
+    "publishedAt": "2026-04-02T02:18:57+00:00"
+  },
+  {
+    "id": "Wvj1mTqyzsQ",
+    "title": "BREAKING: Claude Code source leaked",
+    "description": "Not clickbait, the full claude code source code got leaked…\n\nThank you Greptile for sponsoring! Check them out at: https://soydev.link/greptile\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i4.ytimg.com/vi/Wvj1mTqyzsQ/hqdefault.jpg",
+    "publishedAt": "2026-04-01T04:15:07+00:00"
+  },
+  {
+    "id": "1t-k6-m50Fc",
+    "title": "Saving the web from Javascript bloat",
+    "description": "The JavaScript bloat problem is very very real\n\nThank you Browserbase for sponsoring! Check them out at: https://soydev.link/browserbase\n\nAnd check out G2i plus React Miami & AI Engineer Miami: https://www.ai.engineer/miami, make sure to use THEO50OFF\n\nSOURCES\nhttps://43081j.com/2026/03/three-pillars-of-javascript-bloat\nhttps://bsky.app/profile/43081j.com\nhttps://opencollective.com/e18e\nhttps://e18e.dev/\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i2.ytimg.com/vi/1t-k6-m50Fc/hqdefault.jpg",
+    "publishedAt": "2026-03-29T19:57:01+00:00"
+  },
+  {
+    "id": "pzUn9wTCgcw",
+    "title": "Jira and Linear are legacy software",
+    "description": "The current shape of JIRA and Linear isn't going to last. \n\nThank you WorkOS for sponsoring! Check them out at: https://soydev.link/workos\n\nSOURCE\nhttps://linear.app/next\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i1.ytimg.com/vi/pzUn9wTCgcw/hqdefault.jpg",
+    "publishedAt": "2026-03-27T09:55:28+00:00"
+  },
+  {
+    "id": "l-gfVIm0Xn8",
+    "title": "OpenAI is lying",
+    "description": "OpenAI put out an article about how good GPT-5.4 is at UI and uh. Well...\n\nThank you Kernel for sponsoring! Check them out at: https://soydev.link/kernel\n\nSOURCES\nhttps://x.com/gdb/status/2035467731437527127\nhttps://developers.openai.com/blog/designing-delightful-frontends-with-gpt-5-4\nhttps://x.com/daradoescode/status/2036840887095787615\nhttps://www.youtube.com/@daradoescode\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i1.ytimg.com/vi/l-gfVIm0Xn8/hqdefault.jpg",
+    "publishedAt": "2026-03-26T12:48:53+00:00"
+  },
+  {
+    "id": "w62xTVuyu3s",
+    "title": "AI has a subsidization problem",
+    "description": "AI subscriptions from the top labs are very heavily subsidized at this point. $5,000 for $200 isn't going to last forever, and inference isn't cheap\n\nThank you Depot for sponsoring! Check them out at: https://soydev.link/depot\n\nAnd also Rork! Check them out at: https://soydev.link/rork\n\nSOURCES\nhttps://discuss.ai.google.dev/t/google-ai-pro-antigravity-quota-shows-multi-day-lockouts-instead-of-5-hour-reset/130202/22\nhttps://github.com/orgs/community/discussions/189268\nhttps://x.com/geminicli/status/2034326558719062375\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i4.ytimg.com/vi/w62xTVuyu3s/hqdefault.jpg",
+    "publishedAt": "2026-03-25T09:04:59+00:00"
+  },
+  {
+    "id": "RIkSlHgQYog",
+    "title": "I need you guys to trust me on this (sorry Anthropic)",
+    "description": "T3 Code now supports Claude Code. Only problem is I'm not entirely sure if it'll get you or me or anyone banned... check it out at https://t3.codes\n\nThank you Blacksmith for sponsoring! Check them out at: https://soydev.link/blacksmith\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i3.ytimg.com/vi/RIkSlHgQYog/hqdefault.jpg",
+    "publishedAt": "2026-03-24T00:54:30+00:00"
+  },
+  {
+    "id": "QGnKTRtEH50",
+    "title": "Did Cursor really steal Kimi???",
+    "description": "Cursor's Composer 2.0 is really good. It also happens to be a fine tune of Kimi K2.5...\n\nThank you WorkOS for sponsoring! Check them out at: https://soydev.link/workos\n\nAnd check out G2i plus React Miami & AI Engineer Miami: https://www.ai.engineer/miami, make sure to use THEO50OFF\n\nSOURCES\nhttps://x.com/leerob/status/2035035355364081694\nhttps://x.com/Kimi_Moonshot/status/2035074972943831491\nhttps://x.com/fynnso/status/2034706304875602030?s=20\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i2.ytimg.com/vi/QGnKTRtEH50/hqdefault.jpg",
+    "publishedAt": "2026-03-22T17:32:47+00:00"
+  },
+  {
+    "id": "QwShVo0zfuk",
+    "title": "Everything needs to change",
+    "description": "We need a new ide. Cursor was a great first step, but we need to go further...\n\nThank you Kernel for sponsoring! Check them out at: https://soydev.link/kernel\n\nSOURCE\nhttps://x.com/karpathy/status/2031767720933634100\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i2.ytimg.com/vi/QwShVo0zfuk/hqdefault.jpg",
+    "publishedAt": "2026-03-20T12:35:17+00:00"
+  },
+  {
+    "id": "mVKxygo5Sdo",
+    "title": "Vercel accuses Cloudflare of stealing",
+    "description": "Vercel and Cloudflare are fighting again. This time it's about bash.\n\nThank you Browserbase for sponsoring! Check them out at: https://soydev.link/browserbase\n\nSOURCES\nhttps://x.com/cramforce/status/2033285112478171373\nhttps://x.com/threepointone/status/2028187706786824233\nhttps://github.com/vercel-labs/just-bash\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i2.ytimg.com/vi/mVKxygo5Sdo/hqdefault.jpg",
+    "publishedAt": "2026-03-19T11:49:33+00:00"
+  },
+  {
+    "id": "JKbVk6bIXvA",
+    "title": "I did not expect this...",
+    "description": "Vite's taken over basically everything in the frontend world. And now we've got vite+, fully open source\n\nThank you General Translation for sponsoring! Check them out at: https://soydev.link/gt\n\nSOURCE\nhttps://voidzero.dev/posts/announcing-vite-plus-alpha\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i3.ytimg.com/vi/JKbVk6bIXvA/hqdefault.jpg",
+    "publishedAt": "2026-03-17T23:40:47+00:00"
+  },
+  {
+    "id": "v0gyPfrlOc8",
+    "title": "You don't want to be a manager.",
+    "description": "A weird thing happens in software engineering when you get really good. You stop writing code...\n\nThank you Augument for sponsoring! Check them out at: https://soydev.link/intent\n\nSOURCE\nhttps://newsletter.manager.dev/p/dont-become-an-engineering-manager\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i3.ytimg.com/vi/v0gyPfrlOc8/hqdefault.jpg",
+    "publishedAt": "2026-03-16T19:06:16+00:00"
+  },
+  {
+    "id": "l8pQeVVaqpY",
+    "title": "Open source is dying",
+    "description": "AI has broken open source in a lot of ways. We need to fix this.\n\nThank you Blacksmith for sponsoring! Check them out at: https://soydev.link/blacksmith\n\nSOURCES\nhttps://x.com/RhysSullivan/status/2012655238952403149/photo/1\nhttps://x.com/tldraw/status/2011911073834672138\nhttps://nodejs.org/en/blog/announcements/hackerone-signal-requirement\nhttps://x.com/mitchellh/status/2020252149117313349\nhttps://github.com/mitchellh/vouch\nhttps://github.com/cheater/articles/blob/master/web_of_trust_and_ecosystem.md\nhttps://github.com/peakoss/anti-slop\n\nWant to sponsor a video? Learn more here: https://soydev.link/sponsor-me\n\nCheck out my Twitch, Twitter, Discord more at https://t3.gg\n\nS/O @Ph4seon3 for the awesome edit 🙏",
+    "thumbnailUrl": "https://i1.ytimg.com/vi/l8pQeVVaqpY/hqdefault.jpg",
+    "publishedAt": "2026-03-14T00:23:45+00:00"
+  }
+]

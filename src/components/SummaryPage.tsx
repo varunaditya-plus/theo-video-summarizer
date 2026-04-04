@@ -1,6 +1,6 @@
 import { code } from '@streamdown/code'
-import { mermaid } from '@streamdown/mermaid'
 import { Streamdown } from 'streamdown'
+import { MermaidDiagram } from './MermaidDiagram'
 
 type SummaryPageProps = {
   videoTitle: string
@@ -20,14 +20,7 @@ export function SummaryPage({ videoTitle, loading, loadError, summaryMarkdown }:
           <Streamdown
             className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold"
             mode="static"
-            plugins={{ code, mermaid }}
-            mermaid={{
-              config: {
-                theme: 'dark',
-                securityLevel: 'loose',
-                flowchart: { useMaxWidth: false },
-              },
-            }}
+            plugins={{ code, renderers: [{ language: 'mermaid', component: MermaidDiagram }] }}
             shikiTheme={['github-dark', 'github-dark']}
           >
             {summaryMarkdown}
