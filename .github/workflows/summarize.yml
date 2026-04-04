@@ -1,0 +1,43 @@
+name: Summarize new videos
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: summarize
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Summarize new videos
+        env:
+          OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
+        run: node scripts/summarize.mjs
+
+      - name: Commit and push if any new videos
+        run: |
+          git config user.name "watching theo"
+          git config user.email "canihaveaninternship@t3.gg"
+          if [[ -n "$(git status --porcelain public)" ]]; then
+            git add public/
+            git commit -m "chore: update video summaries"
+            git push
+          else
+            echo "No changes under public/"
+          fi

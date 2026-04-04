@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-synthesis: none;
+  }
+  body { @apply min-h-screen min-w-[320px] bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100; }
+  #root { @apply min-h-screen; }
+}
