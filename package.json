@@ -11,14 +11,14 @@
     "summarize": "node scripts/summarize.mjs"
   },
   "dependencies": {
+    "@streamdown/code": "^1.1.1",
+    "@streamdown/mermaid": "^1.0.2",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.2",
     "fast-xml-parser": "^5.2.5",
-    "mermaid": "^11.14.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-markdown": "^10.1.0",
-    "remark-gfm": "^4.0.1",
+    "streamdown": "^2.5.0",
     "tailwindcss": "^4.2.2",
     "youtube-transcript": "^1.2.1"
   },

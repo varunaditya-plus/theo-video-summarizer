@@ -8,9 +8,22 @@ const pub = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
 const videosJson = join(pub, "videos.json");
 const syncState = join(pub, "sync_state.json");
 const videosDir = join(pub, "videos");
-const feed = "https://www.youtube.com/feeds/videos.xml?channel_id=UCtuO2h6OwDueF7h3p8DYYjQ";
+const feed = "https://www.youtube.com/feeds/videos.xml?channel_id=UCbRP3c757lWg9M-U7TyEkXA";
 
-const SYSTEM_PROMPT = `You will be provided a youtube transcript. From it, extract the most important points and write a detailed summary of the points he makes, his explanation/experiences, etc. I want to understand all of his opinions, experiences, thoughts, conclusions, etc. Make your response brief while keeping all key points so I just understand his ideas, reasoning and conclusion. Respond in markdown with no title (title will be added). Use bullet points, and mermaid.js if needed for diagrams.`;
+const SYSTEM_PROMPT = `You will be provided a youtube transcript. From it, extract the most important points and write a detailed summary of the points he makes opinions, explanations, experiences, reasoning, and conclusions that the reader grasps his ideas without watching the video.
+
+Structure:
+- Respond in markdown with title (a title will be added).
+- Use a warm, clear tone. Be precise and include what points he makes in the video.
+- Do not use emojis.
+
+Formatting:
+- Prefer the minimum markdown needed for clarity: avoid stacking many bold labels, excessive subheadings, or dense one-line bullet farms.
+- When the content is narrative or linear, use short paragraphs. When it is multifaceted (distinct claims, steps, or themes), use bullet points-and make each bullet a full thought (about one to two sentences), not a bare keyword.
+- Use subheadings sparingly-only when they genuinely separate major sections of the summary.
+- Use Mermaid diagrams when they clarify relationships, flows, or structure that prose might obscure, or to show something he definitely showed in the video.
+- Refer to the speaker as "Theo." Where he takes a position on debated topics, show his arguments and counterarguments and his points.
+- If the transcript is thin or ambiguous on a point, don't invent detail.`;
 
 const xml = new XMLParser({ ignoreAttributes: false, removeNSPrefix: true, trimValues: true });
 
@@ -31,25 +44,42 @@ function entriesFromXml(s) {
     }));
 }
 
-async function run() {
-  mkdirSync(videosDir, { recursive: true });
+function parseVideoArg() {
+  const raw = process.argv.find((a) => a.startsWith("--video="))?.slice(8)?.trim();
+  if (!raw) return null;
+  const fromUrl = raw.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/)?.[1];
+  return (fromUrl || raw).slice(0, 11);
+}
 
-  const r = await fetch(feed);
-  if (!r.ok) throw new Error(`RSS ${r.status}`);
-  const entries = entriesFromXml(await r.text());
-
-  const list = read(videosJson, []);
-  const skipped = new Set(read(syncState, {})?.skippedVideoIds ?? []);
-  const have = new Set(list.map((v) => v.id));
-
-  if (list.length === 0 && !existsSync(syncState)) {
-    write(syncState, { skippedVideoIds: entries.map((e) => e.id) });
-    return console.log("Bootstrap", entries.length);
+async function fetchShortDescription(id) {
+  const res = await fetch(`https://www.youtube.com/watch?v=${id}`, { headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" } });
+  if (!res.ok) return "";
+  const html = await res.text();
+  const m = html.match(/"shortDescription":"((?:[^"\\]|\\.)*)"/);
+  if (!m) return "";
+  try {
+    return JSON.parse('"' + m[1] + '"').trim();
+  } catch {
+    return "";
   }
+}
 
-  const c = entries.find((e) => !have.has(e.id) && !skipped.has(e.id));
-  if (!c) return console.log("No new video.");
+async function oembedMeta(id) {
+  const u = `https://www.youtube.com/oembed?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${id}`)}&format=json`;
+  const r = await fetch(u);
+  if (!r.ok) throw new Error(`oEmbed ${r.status}`);
+  const j = await r.json();
+  const description = await fetchShortDescription(id);
+  return {
+    id,
+    title: String(j.title ?? "").trim(),
+    description,
+    thumbnailUrl: String(j.thumbnail_url ?? "").trim() || `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+    publishedAt: new Date().toISOString(),
+  };
+}
 
+async function summarizeAndWrite(c, list) {
   const transcript = (await fetchTranscript(c.id)).map((x) => x.text).join(" ");
   if (!transcript.trim()) throw new Error("Empty transcript");
 
@@ -68,7 +98,7 @@ async function run() {
     }),
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data?.error?.message || `OpenRouter ${res.status}`);
+  if (!res.ok) throw new Error(data?.error?.message || `OpenRouter ${r.status}`);
   const summary = data?.choices?.[0]?.message?.content?.trim();
   if (!summary) throw new Error("No summary in response");
 
@@ -89,6 +119,61 @@ async function run() {
   next.sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
   write(videosJson, next);
   console.log(c.id);
+}
+
+async function run() {
+  mkdirSync(videosDir, { recursive: true });
+  const list = read(videosJson, []);
+  const forcedId = parseVideoArg();
+  const feedAll = process.argv.includes("--feed-all");
+  const forceFeed = process.argv.includes("--force");
+
+  const r = await fetch(feed);
+  if (!r.ok) throw new Error(`RSS ${r.status}`);
+  const entries = entriesFromXml(await r.text());
+
+  if (feedAll) {
+    let done = 0;
+    let skipped = 0;
+    let failed = 0;
+    for (const c of entries) {
+      const out = join(videosDir, `${c.id}.json`);
+      if (existsSync(out) && !forceFeed) {
+        skipped++;
+        console.log("skip", c.id);
+        continue;
+      }
+      try {
+        await summarizeAndWrite(c, read(videosJson, []));
+        done++;
+      } catch (e) {
+        failed++;
+        console.error("fail", c.id, e?.message || e);
+      }
+      await new Promise((res) => setTimeout(res, 1500));
+    }
+    console.log(JSON.stringify({ feed: entries.length, done, skipped, failed }));
+    return;
+  }
+
+  if (forcedId) {
+    const c = entries.find((e) => e.id === forcedId) ?? (await oembedMeta(forcedId));
+    await summarizeAndWrite(c, list);
+    return;
+  }
+
+  const skipped = new Set(read(syncState, {})?.skippedVideoIds ?? []);
+  const have = new Set(list.map((v) => v.id));
+
+  if (list.length === 0 && !existsSync(syncState)) {
+    write(syncState, { skippedVideoIds: entries.map((e) => e.id) });
+    return console.log("Bootstrap", entries.length);
+  }
+
+  const c = entries.find((e) => !have.has(e.id) && !skipped.has(e.id));
+  if (!c) return console.log("No new video.");
+
+  await summarizeAndWrite(c, list);
 }
 
 run().catch((e) => {
