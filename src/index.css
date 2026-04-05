@@ -37,4 +37,26 @@
   body { @apply min-h-screen min-w-[320px] bg-neutral-950 text-neutral-100; }
   #root { @apply min-h-screen; }
   * { scrollbar-width: none !important; }
+
+  @keyframes summary-ai-reveal-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .summary-ai-reveal {
+    opacity: 0;
+    animation: summary-ai-reveal-in 0.4s ease-out forwards;
+    animation-delay: var(--ai-stagger, 0ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .summary-ai-reveal {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+  }
 }

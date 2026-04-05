@@ -1,37 +1,11 @@
-import { useEffect, useState } from 'react'
-import { Link, useParams } from '@tanstack/react-router'
+import { getRouteApi, Link } from '@tanstack/react-router'
 import { SummaryPage } from './SummaryPage'
-import type { Video } from '../types/video'
-import { assetUrl } from '../lib/paths'
-import { loadVideos } from '../lib/videos'
 
-type DetailState = { error: true } | string | null
+const videoRouteApi = getRouteApi('/$videoId')
 
 export function VideoPage() {
-  const { videoId } = useParams({ from: '/$videoId' })
-  const [videos, setVideos] = useState<Video[]>([])
-  const [detail, setDetail] = useState<DetailState>(null)
-  const [detailLoading, setDetailLoading] = useState(false)
-
-  useEffect(() => {
-    loadVideos()
-      .then(setVideos)
-      .catch(() => {})
-  }, [])
-
-  useEffect(() => {
-    setDetail(null)
-    setDetailLoading(true)
-    fetch(assetUrl(`videos/${videoId}.md`))
-      .then((r) => {
-        if (!r.ok) throw new Error('Summary not found')
-        return r.text()
-      })
-      .then(setDetail)
-      .catch(() => setDetail({ error: true }))
-      .finally(() => setDetailLoading(false))
-  }, [videoId])
-
+  const { videos, summaryMarkdown, loadError } = videoRouteApi.useLoaderData()
+  const { videoId } = videoRouteApi.useParams()
   const selected = videos.find((x) => x.id === videoId)
 
   return (
@@ -42,11 +16,11 @@ export function VideoPage() {
         </Link>
       </nav>
       <SummaryPage
-        loading={detailLoading}
-        loadError={Boolean(detail && typeof detail === 'object' && 'error' in detail)}
+        loading={false}
+        loadError={loadError}
         videoTitle={selected?.title ?? ''}
         videoDescription={selected?.description ?? ''}
-        summaryMarkdown={typeof detail === 'string' ? detail : null}
+        summaryMarkdown={summaryMarkdown}
       />
     </div>
   )

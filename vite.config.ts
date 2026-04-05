@@ -18,4 +18,7 @@ function notFound() {
 export default defineConfig({
   appType: 'spa',
   plugins: [react(), tailwindcss(), notFound()],
+  build: {
+    chunkSizeWarningLimit: 1600,
+  },
 })

@@ -39,7 +39,7 @@ export function MermaidDiagram({ code }: CustomRendererProps) {
   }, [code])
 
   return (
-    <div className="my-4 overflow-x-auto [&_svg]:h-auto [&_svg]:max-w-full">
+    <div className="summary-mermaid-block my-4 overflow-x-auto [&_svg]:h-auto [&_svg]:max-w-full">
       {error != null && <p className="mb-2 text-sm text-red-400">{error.message}</p>}
       {svg != null && <div className="flex justify-center" data-streamdown="mermaid-block" dangerouslySetInnerHTML={{ __html: svg }} />}
     </div>
