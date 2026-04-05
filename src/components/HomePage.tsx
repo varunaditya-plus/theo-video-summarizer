@@ -36,7 +36,7 @@ export function HomePage() {
       <header className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Theo video summaries</h1>
         <p className="mt-1 text-neutral-400">
-          A better way to know what's going on in tech. This site summarizes a bunch of Theo's videos (with sponsors because making a video about this doesn't pay the bills) so you know what's going on quickly. <b>The content on this site is produced by AI</b>. Also, this site is open source at <a href="https://github.com/varunaditya-plus/theo-summarizer" className="text-neutral-300 hover:text-white underline">github.com/varunaditya-plus/theo-summarizer</a>.
+          A better way to know what's going on in tech. This site summarizes a bunch of Theo's videos (with sponsors because making a video about this doesn't pay the bills) so you know what's going on quickly. <b>The content on this site is produced by AI</b>. Also, this site is open source at <a href="https://github.com/varunaditya-plus/theo-video-summarizer" className="text-neutral-300 hover:text-white underline">github.com/varunaditya-plus/theo-video-summarizer</a>.
         </p>
       </header>
 
