@@ -47,7 +47,7 @@ export function HomePage() {
           {videos.map((v) => (
             <li key={v.id}>
               <Link to="/$videoId" params={{ videoId: v.id }} preload="intent" className="flex w-full cursor-pointer flex-col overflow-hidden border border-neutral-800 bg-neutral-900 text-left transition hover:border-neutral-700">
-                <img className="aspect-video w-full bg-neutral-900 object-cover" src={v.thumbnailUrl || `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`} loading="lazy" decoding="async" />
+                <img className="aspect-video w-full bg-neutral-900 object-cover" src={v.thumbnailUrl || `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`} alt="" loading="lazy" decoding="async" />
                 <span className="p-2.5 text-xs font-semibold leading-snug">{v.title}</span>
               </Link>
             </li>

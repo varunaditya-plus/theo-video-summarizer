@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import 'streamdown/styles.css'
 import { code } from '@streamdown/code'
 import { Streamdown } from 'streamdown'
 import type { CustomRendererProps } from 'streamdown'
