@@ -79,6 +79,16 @@ async function oembedMeta(id) {
   };
 }
 
+function isTranscriptUnavailableError(e) {
+  const msg = String(e?.message ?? e ?? "");
+  return (
+    /transcript is disabled/i.test(msg) ||
+    msg === "Empty transcript" ||
+    /could not retrieve.*transcript/i.test(msg) ||
+    /no transcript available/i.test(msg)
+  );
+}
+
 async function summarizeAndWrite(c, list) {
   const transcript = (await fetchTranscript(c.id)).map((x) => x.text).join(" ");
   if (!transcript.trim()) throw new Error("Empty transcript");
@@ -160,7 +170,15 @@ async function run() {
 
   if (forcedId) {
     const c = entries.find((e) => e.id === forcedId) ?? (await oembedMeta(forcedId));
-    await summarizeAndWrite(c, list);
+    try {
+      await summarizeAndWrite(c, list);
+    } catch (e) {
+      if (isTranscriptUnavailableError(e)) {
+        console.error(`skip (no transcript): ${c.id}`, e?.message || e);
+        return;
+      }
+      throw e;
+    }
     return;
   }
 
@@ -172,10 +190,28 @@ async function run() {
     return console.log("Bootstrap", entries.length);
   }
 
-  const c = entries.find((e) => !have.has(e.id) && !skipped.has(e.id));
-  if (!c) return console.log("No new video.");
+  function persistSkipped(id) {
+    skipped.add(id);
+    const state = read(syncState, {});
+    const merged = [...new Set([...(state.skippedVideoIds ?? []), id])];
+    write(syncState, { ...state, skippedVideoIds: merged });
+  }
 
-  await summarizeAndWrite(c, list);
+  for (;;) {
+    const c = entries.find((e) => !have.has(e.id) && !skipped.has(e.id));
+    if (!c) return console.log("No new video.");
+    try {
+      await summarizeAndWrite(c, list);
+      return;
+    } catch (e) {
+      if (isTranscriptUnavailableError(e)) {
+        console.error(`skip (no transcript): ${c.id}`, e?.message || e);
+        persistSkipped(c.id);
+        continue;
+      }
+      throw e;
+    }
+  }
 }
 
 run().catch((e) => {
